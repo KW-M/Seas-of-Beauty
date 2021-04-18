@@ -1,0 +1,46 @@
+import Phaser from 'phaser';
+import images_starfield from 'url:../assets/starfield.png';
+import images_hook from 'url:../assets/hook.png';
+import images_mantaray from 'url:../assets/manta_anim.png';
+import images_boat from 'url:../assets/boat_anim.png';
+import images_waves from 'url:../assets/waves_anim.png';
+import images_oceangradient from 'url:../assets/ocean_gradient.png';
+import images_explosion from 'url:../assets/explosion.png';
+import sounds_explosion38 from 'url:../assets/explosion38.wav';
+import sounds_rocket_shot from 'url:../assets/rocket_shot.wav';
+import sounds_soundtrack from 'url:../assets/The_Spyprobe_-_Oceanforms.mp3';
+//https://www.jamendo.com/track/970793/oceanforms by the THE SPYPROBE (CC)
+
+export default class BootScene extends Phaser.Scene {
+  constructor() {
+    super({ key: 'boot' });
+  }
+
+  preload() {
+    var bg = this.add.rectangle(this.game.config.width / 2, this.game.config.height / 2, 400, 30, 0x666666).setOrigin(0.5, 0.5);
+    var bar = this.add.rectangle(bg.x, bg.y, bg.width, bg.height, 0xffffff).setScale(0, 1).setOrigin(0.5, 0.5);
+
+    console.log(images_waves);
+
+    this.load.image("starfield", images_starfield);
+    this.load.image('hook', images_hook);
+    this.load.image('waves', images_waves);// { frameWidth: 64, frameHeight: 4, startFrame: 0, endFrame: 9 };
+    this.load.image('oceangradient', images_oceangradient);
+    this.load.spritesheet('manta', images_mantaray, { frameWidth: 64, frameHeight: 64, startFrame: 0, endFrame: 10 });
+    this.load.spritesheet('boat', images_boat, { frameWidth: 64, frameHeight: 48, startFrame: 0, endFrame: 9 });
+    this.load.spritesheet('explosion', images_explosion, { frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9 });
+    this.load.audio('sfx_explosion', sounds_explosion38);
+    this.load.audio('sfx_rocket', sounds_rocket_shot);
+    this.load.audio('soundtrack', sounds_soundtrack)
+
+    this.load.on('progress', function (progress) {
+      bar.setScale(progress, 1);
+    });
+  }
+
+  update() {
+    // this.scene.start('menu');
+    this.scene.start('play');
+    // this.scene.remove();
+  }
+}
