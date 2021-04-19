@@ -3,17 +3,12 @@ import Hook from '../prefabs/Hook';
 import Boat from '../prefabs/Boat';
 import Manta from '../prefabs/Manta';
 import Trash from '../prefabs/Trash';
+import KeyTut from '../prefabs/KeyTutorial';
 
 export default class PlayScene extends Phaser.Scene {
   constructor() {
     super({
       key: 'play',
-      physics: {
-        arcade: {
-          gravity: { y: 300 },
-          debug: false
-        }
-      }
     });
   }
   preload() {
@@ -39,38 +34,22 @@ export default class PlayScene extends Phaser.Scene {
     let music = this.sound.add('soundtrack', { loop: true });
     music.play();
 
-    // var emitter = this.add.particles('explosion')
-    //   .createEmitter({
-    //     speed: 100,
-    //     scale: { start: 1, end: 0 },
-    //     blendMode: 'ADD'
-    //   });
-
-    // var logo = this.physics.add.image(400, 100, 'rocket')
-    //   .setVelocity(100, 200)
-    //   .setBounce(1, 1)
-    //   .setCollideWorldBounds(true);
-
-    // emitter.startFollow(logo);
-
-    this.gameOver = false;
+    this.starfield = this.add.tileSprite(
+      0, 0, gameSize, gameSize, 'starfield'
+    ).setOrigin(0, 0);
 
     // score
-    this.score = 0;
+    this.score = 1;
     let scoreConfig = {
       fontFamily: 'Courier',
-      fontSize: '28px',
-      backgroundColor: '#000000',
-      color: '#FFFF66',
-      align: 'center',
-      padding: {
-        top: 5,
-        bottom: 5,
-      },
-      fixedWidth: 50
+      fontSize: '15px',
+      color: '#C0C0C0',
+      align: 'left',
     };
 
-    this.scoreLeft = this.add.text(0, 0, this.score, scoreConfig);
+    this.scoreLeft = this.add.text(20, gameSize - 28, "Ocean Cleaned: " + (this.score / 100) + "%", scoreConfig);
+
+    this.keyTut = new KeyTut(this);
 
     this.anims.create({
       key: 'explode',
@@ -92,9 +71,6 @@ export default class PlayScene extends Phaser.Scene {
       repeat: Infinity
     });
 
-    this.starfield = this.add.tileSprite(
-      0, 0, gameSize, gameSize, 'starfield'
-    ).setOrigin(0, 0);
 
     let gradientA = this.add.image(borderPadding, borderPadding, 'oceangradient').setAlpha(0.5).setOrigin(0, 0);
     let scaleFactor = (gameSize - (borderPadding * 2)) / gradientA.width;
@@ -227,6 +203,6 @@ export default class PlayScene extends Phaser.Scene {
       boom.destroy();
     });
     this.score += trashItem.pointValue;
-    this.scoreLeft.setText(this.score);
+    this.scoreLeft.setText("Ocean Cleaned: " + (this.score / 100) + "%");
   }
 }
