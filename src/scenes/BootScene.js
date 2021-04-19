@@ -9,6 +9,13 @@ import images_explosion from 'url:../assets/explosion.png';
 import sounds_explosion38 from 'url:../assets/explosion38.wav';
 import sounds_rocket_shot from 'url:../assets/rocket_shot.wav';
 import sounds_soundtrack from 'url:../assets/The_Spyprobe_-_Oceanforms.mp3';
+
+import images_bottle1 from 'url:../assets/Bottle1.png';
+import images_tire1 from 'url:../assets/Tire1.png';
+import images_bag1 from 'url:../assets/Bag1.png';
+import images_bag2 from 'url:../assets/Bag2.png';
+import images_bag3 from 'url:../assets/Bag3.png';
+import images_bag4 from 'url:../assets/Bag4.png';
 //https://www.jamendo.com/track/970793/oceanforms by the THE SPYPROBE (CC)
 
 export default class BootScene extends Phaser.Scene {
@@ -24,6 +31,12 @@ export default class BootScene extends Phaser.Scene {
 
     this.load.image("starfield", images_starfield);
     this.load.image('hook', images_hook);
+    this.load.image('bottle1', images_bottle1);
+    this.load.image('tire1', images_tire1);
+    this.load.image('bag1', images_bag1);
+    this.load.image('bag2', images_bag2);
+    this.load.image('bag3', images_bag3);
+    this.load.image('bag4', images_bag4);
     this.load.image('waves', images_waves);// { frameWidth: 64, frameHeight: 4, startFrame: 0, endFrame: 9 };
     this.load.image('oceangradient', images_oceangradient);
     this.load.spritesheet('manta', images_mantaray, { frameWidth: 64, frameHeight: 64, startFrame: 0, endFrame: 10 });

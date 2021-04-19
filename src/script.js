@@ -25,14 +25,11 @@ window.SquareSideEnum = Object.freeze({
 //     // game.me = game.ships[id] = {data: d = {id: id, t: game.now}};
 // }
 
-
-
-window.gameSize = Math.min(window.innerWidth, window.innerHeight)
-
+window.gameSize = 600;
 let gameConfig = {
     type: Phaser.AUTO,
-    width: 600,
-    height: 600,
+    width: gameSize,
+    height: gameSize,
     autoCenter: Phaser.Scale.Center.CENTER_BOTH,
     autoRound: true,
     physics: {
@@ -42,14 +39,13 @@ let gameConfig = {
             gravity: {
                 y: 0
             },
-            debug: {
-                showBody: true,
-                showStaticBody: true
-            }
+            // debug: {
+            //     showBody: true,
+            //     showStaticBody: true
+            // }
         }
     },
 
-    // audio: {'disableWebAudio':true},
     banner: { text: 'white', background: ['#FD7400', '#FFE11A', '#BEDB39', '#1F8A70', '#004358'] },
     scene: [BootScene, MenuScene, PlayScene, EndScene]
 };
@@ -57,27 +53,9 @@ let gameConfig = {
 function newGame() {
     if (game) return;
     game = new Phaser.Game(gameConfig);
-    // game.state.add("start area", function (game) {
-    //     this.preload = function () {
+    adjustCanvasSize(game.canvas)
+    window.addEventListener('resize', () => { adjustCanvasSize(game.canvas) });
 
-    //     };
-    //     this.create = function () {
-    //         console.debug("Setup pointer and scale");
-    //         game.input.maxPointers = 1;
-    //         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-    //         game.scale.pageAlignHorizontally = true;
-    //         game.scale.pageAlignVertically = true;
-    //         game.scale.setScreenSize(true);
-    //         game.scale.refresh();
-    //         adjustCanvasSize();
-    //     };
-    //     this.update = function () {
-
-    //     }
-    // });
-    adjustCanvasSize()
-
-    // game.state.start("start area");
 }
 
 function destroyGame() {
@@ -93,14 +71,12 @@ if (module.hot) {
     module.hot.dispose(destroyGame);
     module.hot.accept(newGame);
 }
-
+window.onload = () => {
 if (!game) newGame();
-
-function adjustCanvasSize() {
-    var divgame = document.getElementsByTagName("canvas")[0];
+}
+function adjustCanvasSize(canvas) {
     let size = Math.min(window.innerWidth, window.innerHeight)
-    divgame.style.width = size + "px";
-    divgame.style.height = size + "px";
+    canvas.style.width = size + "px";
+    canvas.style.height = size + "px";
 }
 
-window.addEventListener('resize', adjustCanvasSize);
