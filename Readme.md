@@ -2,6 +2,8 @@
 
 A small game I made for the CMPM 120 series at UCSC
 
+Play the [live game](https://kw-m.github.io/Seas-of-Beauty)!
+
 This work is licensed under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/)
 
 ![](https://i.creativecommons.org/l/by/4.0/88x31.png)

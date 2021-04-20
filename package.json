@@ -1,7 +1,7 @@
 {
-  "name": "rocket-patrol",
+  "name": "seas-of-beauty",
   "version": "1.0.0",
-  "description": "Rocket Phaser 3 Example Game for 120 ",
+  "description": "Phaser 3 Game for 120 ",
   "directories": {
     "lib": "lib"
   },
