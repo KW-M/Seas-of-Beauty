@@ -1,37 +1,26 @@
+/*
+Title: Seas of Beauty - Kyle Worcester-Moore - 2021/4/19
+
+Things I did to the original "Rocket Patrol" example: (About 20 hrs to finish)
+- (5) Add nice background music - https://www.jamendo.com/track/970793/oceanforms by the THE SPYPROBE (CC)
+- (60) Made a different game - Redesign the game's artwork, UI, and sound to change its theme/aesthetic
+- (5) Create new animated sprites for the "Spaceship enemies" & "Rocket" - Manta Ray & Fishing Boats.
+- (30) Simultaneous 4 player mode.
+- (5) Randomize each "spaceship's" (Manta/Trash) movement direction/position/orientation at the start of each play & resets
+- (5) Create a new spaceship type (Manta Ray) that's smaller (Bigger), moves faster (Slower), and is worth more points (negative points)
+- Smooth colision physics with the trash - kinda gives the "ocean currents" effect.
+- Rope physics using Matter js & a spline curve
+
+- Tried to implement networked multiplayer w gunDB, but didn't have the time.
+    - However GunDB looks like an awesome way to hide a lot of the complexity of networked multiplayer for other 120 teams.
+
+Credits to other folks work that was used in this game can be found in the readme. */
+
 import Phaser from 'phaser'
 import BootScene from "./scenes/BootScene"
 import EndScene from './scenes/EndScene';
 import MenuScene from "./scenes/MenuScene"
 import PlayScene from "./scenes/PlayScene"
-import Lockr from "lockr"
-
-// The Seas of Beauty - Kyle Worcester-Moore
-// Things I did: (About 18 Hrs to finish)
-// Add a loading screen
-// Add nice CC background music - https://www.jamendo.com/track/970793/oceanforms by the THE SPYPROBE (CC)
-// Made a different game - Redesign the game's artwork, UI, and sound to change its theme/aesthetic
-// Create new animated sprites for the "Spaceship enemies" & "Rocket" - Manta Ray & Fishing Boats.
-// Simultaneous 4 player mode.
-// Randomize each "spaceship's" (Manta/Trash) movement direction/position/orientation at the start of each play & resets
-// Smooth colision physics with the trash - kinda gives the "ocean currents" effect.
-// Rope physics using Matter js & a spline curve
-// Create a new spaceship type (Manta Ray) that's smaller (Bigger), moves faster (Slower), and is worth more points (negative points)
-
-// Tried to implement networked multiplayer w gunDB, but didn't have the time.
-// However GunDB looks like an awesome way to hide a lot of the complexity of networked multiplayer.
-
-// import Gun from "gun"
-// let gameState = {}
-// window.GunDB = Gun(['https://kwm-120-gun-server.herokuapp.com/']).get('mantaGame')
-// window.GunDB.synchronous(gameState);
-
-// let playerId = Lockr.get('player_id');
-// if(playerId === undefined) {
-//     playerId = Gun.text.random(3, 'abcdefghijklmno');
-//     Lockr.set(playerId);
-//     Gun.get("players").set("player_id")
-//     // game.me = game.ships[id] = {data: d = {id: id, t: game.now}};
-// }
 
 window.SquareSideEnum = Object.freeze({
     'left': 0,
