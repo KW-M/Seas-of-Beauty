@@ -50,24 +50,19 @@ export default class Hook extends Phaser.Physics.Matter.Image {
 
         for (let curvIdx = 0; curvIdx < this.curves.length; curvIdx++) {
             const curve = this.curves[curvIdx];
-            // console.log(curve.points);
             let jointIndx = 0
             for (; jointIndx < this.joints[curvIdx].length; jointIndx++) {
                 const joint = this.joints[curvIdx][jointIndx];
-                // console.log(joint)
-
-                curve.points[jointIndx] = new Phaser.Math.Vector2((joint.bodyA.position.x || 0) + (joint.pointA.x || 0), (joint.bodyA.position.y || 0) + (joint.pointA.y || 0))//.add(new Phaser.Math.Vector2(joint.pointA.x || 0, joint.pointA.y || 0));
-                // console.log(curve.points);
+                curve.points[jointIndx] = new Phaser.Math.Vector2((joint.bodyA.position.x || 0) + (joint.pointA.x || 0), (joint.bodyA.position.y || 0) + (joint.pointA.y || 0))
             }
             curve.draw(this.graphics, 64);
             const joint = this.joints[curvIdx][jointIndx - 1];
-            curve.points[jointIndx] = new Phaser.Math.Vector2((joint.bodyB.position.x || 0) + (joint.pointB.x || 0), (joint.bodyB.position.y || 0) + (joint.pointB.y || 0))//.add(new Phaser.Math.Vector2(, joint.pointB.y || 0));
+            curve.points[jointIndx] = new Phaser.Math.Vector2((joint.bodyB.position.x || 0) + (joint.pointB.x || 0), (joint.bodyB.position.y || 0) + (joint.pointB.y || 0))
         }
 
     }
 
     update() {
-        // this.body.force = { x: 0 , y: -5 }
         this.updateRopes()
     }
 }

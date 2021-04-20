@@ -2,11 +2,11 @@ import Phaser from 'phaser';
 let speed = 3;
 export default class Manta extends Phaser.Physics.Matter.Sprite {
     constructor(scene, texture, frame, pointValue) {
-        super(scene.matter.world, 0, 0, texture, frame, { mass: 200 });
+        super(scene.matter.world, -200, -200, texture, frame, { mass: 200 });
         scene.add.existing(this);
         this.setOrigin(.5, .5);
         this.pointValue = pointValue;
-        this.health = 4;
+        this.health = 15;
         this.direction = null;
         // this.setStatic(true);
         // this.setSensor(true);
@@ -45,7 +45,8 @@ export default class Manta extends Phaser.Physics.Matter.Sprite {
     }
 
     update() {
-        this.setAlpha(this.health / 5)
+        // if (this.health < 0) { this.destroy(); return; }
+        this.setAlpha(this.health / 15)
         if (this.direction === window.SquareSideEnum.left) {
             this.setVelocityX(-speed);
             if (this.x < 0 - this.width) {

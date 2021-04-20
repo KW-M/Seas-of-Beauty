@@ -30,6 +30,7 @@ export default class PlayScene extends Phaser.Scene {
 
     // window.borderUISize = 20
     window.borderPadding = 50
+    this.matter.set30Hz();
 
     let music = this.sound.add('soundtrack', { loop: true });
     music.play();
@@ -48,8 +49,6 @@ export default class PlayScene extends Phaser.Scene {
     };
 
     this.scoreLeft = this.add.text(20, gameSize - 28, "Ocean Cleaned: " + (this.score / 100) + "%", scoreConfig);
-
-    this.keyTut = new KeyTut(this);
 
     this.anims.create({
       key: 'explode',
@@ -81,6 +80,21 @@ export default class PlayScene extends Phaser.Scene {
     // graphics.fillGradientStyle(0x196f8d, 0x0C3C45, 0x76dae1, 0x196f8d, 1);
     // graphics.fillRect(borderPadding, borderPadding, width - (borderPadding * 2), height - (borderPadding * 2));
 
+    // let graphics = this.add.graphics();
+    // graphics.fillStyle(0xffff00, 1);
+    // //  32px radius on the corners
+    // graphics.fillRoundedRect(32, 32, 72, 72, 32);
+    let keySep = 70;
+    let keyOff = 8;
+    new KeyTut(this, gameSize / 2 - keySep, (borderPadding / 2 + keyOff), "a", keyA);
+    new KeyTut(this, gameSize / 2 + keySep, (borderPadding / 2 + keyOff), "d", keyD);
+    new KeyTut(this, gameSize / 2 - keySep, gameSize - (borderPadding / 2 + keyOff), "←", keyLEFT);
+    new KeyTut(this, gameSize / 2 + keySep, gameSize - (borderPadding / 2 + keyOff), "→", keyRIGHT);
+    new KeyTut(this, (borderPadding / 2 + keyOff), gameSize / 2 - keySep, "w", keyW);
+    new KeyTut(this, (borderPadding / 2 + keyOff), gameSize / 2 + keySep, "s", keyS);
+    new KeyTut(this, gameSize - (borderPadding / 2 + keyOff), gameSize / 2 - keySep, "↑", keyUP);
+    new KeyTut(this, gameSize - (borderPadding / 2 + keyOff), gameSize / 2 + keySep, "↓", keyDOWN);
+
     this.hook = new Hook(this, gameSize / 2, gameSize / 2, 'hook')
     const top_layer = this.add.layer();
     top_layer.add([this.hook])
@@ -90,14 +104,19 @@ export default class PlayScene extends Phaser.Scene {
       new Manta(this, 'manta', 0, 1),
       new Manta(this, 'manta', 0, 1),
       new Manta(this, 'manta', 0, 1),
+      new Manta(this, 'manta', 0, 1),
     ]
     for (let i = 0; i < this.mantas.length; i++) {
       const manta = this.mantas[i]
-      setTimeout(() => { manta.reset() }, i * 10000);
-      manta.setOnCollideWith(this.hook.body, (c) => {
-        console.log(c)
+      setTimeout(() => { manta.reset() }, i * 5000);
+      manta.setOnCollideActive((c) => {
+        if (c.bodyA.label != 'hook') return;
+        console.log(manta.health)
         manta.health--;
-        if (manta.health === 0) { manta.removeAllListeners(); manta.destroy(); this.mantas.splice(i, 1); }
+        if (manta.health <= 0) {
+          manta.destroy(); this.mantas.splice(i, 1); this.score = Math.max(0, this.score - 4);
+          this.scoreLeft.setText("Ocean Cleaned: " + (this.score / 100) + "%");
+        }
       })
     }
 
@@ -109,6 +128,7 @@ export default class PlayScene extends Phaser.Scene {
       // new Trash(this, 'bag3', null, 1),
       // new Trash(this, 'bag4', null, 1),
     ]
+
 
 
     this.playerBoats = [ // top,right,bottom,left
@@ -126,9 +146,7 @@ export default class PlayScene extends Phaser.Scene {
       m.setOnCollideActive((c) => {
         if (c.bodyA.label == 'hook' || c.bodyB.label == 'hook') this.catchTrash(m)
         else if (c.collision) {
-          console.log(new Phaser.Math.Vector2(c.collision.penetration).scale(0.001))
           m.addCollisionForce(new Phaser.Math.Vector2(c.collision.penetration).scale(-0.0001))
-          // m.addCollisionForce(new Phaser.Math.Vector2(1, 1))
         }
       })
     }
@@ -155,6 +173,8 @@ export default class PlayScene extends Phaser.Scene {
         borderPadding + wave_half_splash, borderPadding, gameSize - (borderPadding * 2), wave_splash_height, 'waves'
       ).setOrigin(0, 0).setAngle(90)
     ]
+
+
 
     // 60-second play clock
     scoreConfig.fixedWidth = 0;

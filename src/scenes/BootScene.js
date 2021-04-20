@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import images_starfield from 'url:../assets/starfield.png';
 import images_hook from 'url:../assets/hook.png';
+import images_key_bg from 'url:../assets/Key_BG.png';
 import images_mantaray from 'url:../assets/manta_anim.png';
 import images_boat from 'url:../assets/boat_anim.png';
 import images_waves from 'url:../assets/waves_anim.png';
@@ -27,9 +28,8 @@ export default class BootScene extends Phaser.Scene {
     var bg = this.add.rectangle(this.game.config.width / 2, this.game.config.height / 2, 400, 30, 0x666666).setOrigin(0.5, 0.5);
     var bar = this.add.rectangle(bg.x, bg.y, bg.width, bg.height, 0xffffff).setScale(0, 1).setOrigin(0.5, 0.5);
 
-    console.log(images_waves);
-
     this.load.image("starfield", images_starfield);
+    this.load.image('key_bg', images_key_bg);
     this.load.image('hook', images_hook);
     this.load.image('bottle1', images_bottle1);
     this.load.image('tire1', images_tire1);
