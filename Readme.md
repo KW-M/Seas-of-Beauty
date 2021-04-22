@@ -6,7 +6,7 @@ Play the [live game](https://kw-m.github.io/Seas-of-Beauty)!
 
 This work is licensed under the [GNU GENERAL PUBLIC LICENSE Version 3](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
-![](https://i.creativecommons.org/l/by/4.0/88x31.png)
+![](https://www.gnu.org/graphics/gplv3-or-later.png)
 
 ## Tools Used:
 - Phaser 3
