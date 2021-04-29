@@ -1,0 +1,1 @@
+{"mappings":"0CAAiBA,KAAKC,MAAM","sources":["./manifest.json"],"sourcesContent":["{\n    \"lang\": \"en-US\",\n    \"display\": \"standalone\",\n    \"orientation\": \"landscape\"\n}"],"names":["JSON","parse"],"version":3,"file":"manifest.js.map"}
