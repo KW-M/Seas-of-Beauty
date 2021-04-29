@@ -38,7 +38,7 @@ export default class PlayScene extends Phaser.Scene {
     this.starfield = this.add.tileSprite(
       0, 0, gameSize, gameSize, 'starfield'
     ).setOrigin(0, 0);
-
+    this.add.sprite().width
     // score
     this.score = 1;
     let scoreConfig = {

@@ -26,7 +26,6 @@ export default class Trash extends Phaser.Physics.Matter.Sprite {
         let offset = 2;
         this.setAngularVelocity(0)
         this.setVelocity(0, 0)
-        this.setPosition
         this.direction = Math.floor(Math.random() * 3.9)
         if (this.direction === window.SquareSideEnum.left) {
             this.setPosition(window.gameSize + offset + Math.random() * offset, this.get_random());
